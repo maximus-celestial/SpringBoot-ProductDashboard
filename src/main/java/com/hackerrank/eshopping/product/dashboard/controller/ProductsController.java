@@ -1,5 +1,7 @@
 package com.hackerrank.eshopping.product.dashboard.controller;
 
+import java.util.ArrayList;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,9 @@ import com.hackerrank.eshopping.product.dashboard.service.ProductService;
 
 @RestController
 @RequestMapping(value = "/products")
+/*
+ * TODO - To add Swagger Documentation
+ */
 public class ProductsController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(ProductsController.class);
@@ -28,7 +33,9 @@ public class ProductsController {
 	
 	@GetMapping(produces = "application/json")
 	public ResponseEntity<Iterable<Product>> listAll(@RequestParam(required = false) String category, @RequestParam(required = false) String availability) {
+		
 		logger.info("listAll called with category: {} and availability: {} ", category, availability);
+		Iterable<Product> products = new ArrayList<>();
 		
 		// Fetch all products for given category and availability, 
 		// Sorted by Discount Percentage in Descending order 
@@ -47,19 +54,21 @@ public class ProductsController {
 			} else {
 				return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 			}
-			return new ResponseEntity<>(productService.findByCategoryAndAvailability(category, availabilityValue), HttpStatus.OK);
+			products = productService.findByCategoryAndAvailability(category, availabilityValue);
 		} 
 		// Fetch all products for given category 
 		// In-stock Products listed before out of stock products
 		//  With Same Stock availability, sorted by Discounted Price in Ascending Order
 		// With Same Discounted Price, sorted by ID in Ascending Order
 		else if (category != null) {
-			return new ResponseEntity<>(productService.findByCategory(category), HttpStatus.OK);
+			products = productService.findByCategory(category);
 		} 
 		// Fetch all products sorted by ID in ascending order.
 		else {
-			return new ResponseEntity<>(productService.findAll(), HttpStatus.OK);
+			products = productService.findAll();
 		}
+		logger.info("listAll result: {} ", products);
+		return new ResponseEntity<>(products, HttpStatus.OK);
 		
 	}
 	
@@ -77,6 +86,7 @@ public class ProductsController {
 		if(product == null) {
 			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
 		}
+		logger.info("Found product " + product);
 		return new ResponseEntity<>(product, HttpStatus.OK);
 	}
 	
@@ -93,6 +103,7 @@ public class ProductsController {
 		if(savedProduct == null) {
 			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 		}
+		logger.info("Added Product: " + savedProduct);
 		return new ResponseEntity<>(savedProduct, HttpStatus.CREATED);
 	}
 	
@@ -109,6 +120,7 @@ public class ProductsController {
 		if(savedProduct == null) {
 			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 		}
+		logger.info("Update Product: " + savedProduct);
 		return new ResponseEntity<>(savedProduct, HttpStatus.OK);
 	}
 	

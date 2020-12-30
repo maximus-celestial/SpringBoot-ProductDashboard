@@ -2,6 +2,8 @@ package com.hackerrank.eshopping.product.dashboard.model;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Product implements Serializable, Comparable<Product> {
 	
 	private static final long serialVersionUID = 3170315825040184204L;
@@ -9,9 +11,16 @@ public class Product implements Serializable, Comparable<Product> {
 	private Long id;
     private String name;
     private String category;
+    
+    @JsonProperty("retail_price")
     private Double retailPrice;
+    
+    @JsonProperty("discounted_price")
     private Double discountedPrice;    
+    
     private Boolean availability;
+    
+    @JsonProperty("discounted_percentage")
     private Integer discountPercentage;
 
     public Product() {

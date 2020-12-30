@@ -54,8 +54,8 @@ public class ProductServiceImpl implements ProductService {
 	
 	protected void updateProductWithDiscountPercentage(Product product) {
 		Double retailPrice = product.getRetailPrice();
-			product.setDiscountPercentage((int)
-					((retailPrice - product.getDiscountedPrice()) / retailPrice * 100));
+		product.setDiscountPercentage((int)
+				((retailPrice - product.getDiscountedPrice()) / retailPrice * 100));
 	}
 	
 
@@ -141,9 +141,11 @@ public class ProductServiceImpl implements ProductService {
 		@Override
 		public int compare(Product o1, Product o2) {
 			
-			// Sort by availability in natural order
+			// Sort by availability with in-stock listed first followed by out of stock products
+			// ie. in reverse of natural order
 			int availabilityCompare = o1.getAvailability().compareTo(o2.getAvailability());
-			if(availabilityCompare != 0) { return availabilityCompare; }
+			if (availabilityCompare < 0 ) { return 1; }
+			else if (availabilityCompare > 0 ) { return -1; }
 				
 			// If availability is the same, sort by discounted price in ascending order
 			int discountedPriceCompare = o1.getDiscountedPrice().compareTo(o2.getDiscountedPrice());
