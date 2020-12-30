@@ -18,11 +18,8 @@ public class Product implements Serializable, Comparable<Product> {
     @JsonProperty("discounted_price")
     private Double discountedPrice;    
     
-    private Boolean availability;
+    private Boolean availability;    
     
-    @JsonProperty("discounted_percentage")
-    private Integer discountPercentage;
-
     public Product() {
     }
 
@@ -35,15 +32,6 @@ public class Product implements Serializable, Comparable<Product> {
         this.availability = availability;
     }
     
-    public Product(Long id, String name, String category, Double retailPrice, Double discountedPrice, Boolean availability, Integer discountPercentage) {
-        this.id = id;
-        this.name = name;
-        this.category = category;
-        this.retailPrice = retailPrice;
-        this.discountedPrice = discountedPrice;
-        this.availability = availability;
-        this.discountPercentage = discountPercentage;
-    }
 
     public Long getId() {
         return id;
@@ -93,19 +81,10 @@ public class Product implements Serializable, Comparable<Product> {
         this.availability = availability;
     }
 
-	public Integer getDiscountPercentage() {
-		return discountPercentage;
-	}
-
-	public void setDiscountPercentage(Integer discountPercentage) {
-		this.discountPercentage = discountPercentage;
-	}	
-
 	@Override
 	public String toString() {
 		return "Product [id=" + id + ", name=" + name + ", category=" + category + ", retailPrice=" + retailPrice
-				+ ", discountedPrice=" + discountedPrice + ", availability=" + availability + ", discountPercentage="
-				+ discountPercentage + "]";
+				+ ", discountedPrice=" + discountedPrice + ", availability=" + availability + "]";
 	}
 
 	@Override

@@ -33,30 +33,22 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	protected Product getMappedModelFromOptional(Optional<ProductDAO> optional) {
-		return optional.isPresent() ? getMappedModel(optional.get()) : null;
+		return optional.isPresent() ? modelMapper.map(optional.get(), Product.class) : null;
 	}
 	
 	protected Product getMappedModel(ProductDAO dao) {
-		Product product = modelMapper.map(dao, Product.class);
-		updateProductWithDiscountPercentage(product);
-		return product;
+		return modelMapper.map(dao, Product.class);
 	}
 	
 	protected List<Product> getMappedModelList(List<ProductDAO> productDaos) {
 		List<Product> products = new ArrayList<Product>();
 		for (ProductDAO dao : productDaos) {
 			Product product = modelMapper.map(dao, Product.class);
-			updateProductWithDiscountPercentage(product);
 			products.add(product);
 		}
 		return products;	
 	}
 	
-	protected void updateProductWithDiscountPercentage(Product product) {
-		Double retailPrice = product.getRetailPrice();
-		product.setDiscountPercentage((int)
-				((retailPrice - product.getDiscountedPrice()) / retailPrice * 100));
-	}
 	
 
 	@Override
@@ -163,7 +155,12 @@ public class ProductServiceImpl implements ProductService {
 		public int compare(Product o1, Product o2) {
 			
 			// Sort by discount percentage in descending order
-			int disPerCompare = o1.getDiscountPercentage().compareTo(o2.getDiscountPercentage());
+			// calculate discount percentage
+			Double rp1 = o1.getRetailPrice();
+			int disPer1 = (int) ((rp1 - o1.getDiscountedPrice()) / rp1 * 100);
+			Double rp2 = o2.getRetailPrice();
+			int disPer2 = (int) ((rp1 - o2.getDiscountedPrice()) / rp2 * 100);
+			int disPerCompare = disPer1 - disPer2;
 			if (disPerCompare < 0 ) { return 1; }
 			else if (disPerCompare > 0 ) { return -1; }
 				
