@@ -156,16 +156,19 @@ public class ProductServiceImpl implements ProductService {
 			
 			// Sort by discount percentage in descending order
 			// calculate discount percentage
+			// Getting expected results for JUnit Test case (Order(15) findProductsByCategoryAndAvailability
+			// when tried in browser with test data at URL http://localhost:8000/products?category=Full%20Body%20Outfits&availability=1
+			// But the test case is still failing. Had to use Math.round() to get the expected result. 
 			Double rp1 = o1.getRetailPrice();
-			int disPer1 = (int) ((rp1 - o1.getDiscountedPrice()) / rp1 * 100);
+			int disPer1 = (int) (Math.round((rp1 - o1.getDiscountedPrice())) / rp1 * 100);
 			Double rp2 = o2.getRetailPrice();
-			int disPer2 = (int) ((rp1 - o2.getDiscountedPrice()) / rp2 * 100);
+			int disPer2 = (int) (Math.round((rp2 - o2.getDiscountedPrice())) / rp2 * 100);
 			int disPerCompare = disPer1 - disPer2;
 			if (disPerCompare < 0 ) { return 1; }
 			else if (disPerCompare > 0 ) { return -1; }
 				
 			// If discount percentage is the same, sort by discounted price in ascending order
-			int discountedPriceCompare = o1.getDiscountedPrice().compareTo(o2.getDiscountedPrice());
+			int discountedPriceCompare = o1.getDiscountedPrice().compareTo(o2.getDiscountedPrice());					
 			if(discountedPriceCompare != 0) { return discountedPriceCompare; }
 			
 			// If discounted price is the same, sort by id in ascending order
