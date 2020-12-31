@@ -1,0 +1,6 @@
+Kin+Carta - Coding Test - 2880 minutes (48hrs)
+=========================
+
+E-Shopping: Product Dashboard (Backend) - Spring Boot
+2. River Records (Java Algos) - Coding
+

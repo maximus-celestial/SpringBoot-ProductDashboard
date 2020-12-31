@@ -1,0 +1,44 @@
+// GET Requests
+
+http://localhost:8000/products?category=100%20123&availability=0
+
+http://localhost:8000/products?category=100%20123&availability=1
+
+http://localhost:8000/products?category=100%20123
+
+http://localhost:8000/products
+
+http://localhost:8000/products/1
+
+http://localhost:8000/products/s - 404 Error
+
+// POST Request (RequestBody) - 
+new id - add products, 201 created
+exisiting id - 400 bad request
+
+
+// PUT Request
+new id - 400 bad request
+exisiting id - save details while retaining other details, 200 OK
+
+
+H2 Database Entries - 
+=================================
+delete from product;
+
+insert into product (id, name, category, retail_price, discounted_price, availability) values(3, 'Waterproof123', 'Coats and Jackets', 274.0, 230.16, true);
+
+insert into product (id, name, category, retail_price, discounted_price, availability) values(2, 'Waterproof 456', 'Coats and Jackets', 264.0, 230.16, true);
+
+insert into product (id, name, category, retail_price, discounted_price, availability) values(7, 'Waterproof123', 'Coats and Jackets', 220.0, 217.16, false);
+
+insert into product (id, name, category, retail_price, discounted_price, availability) values(1, 'Waterproof', 'Coats and Jackets', 265.0, 230.16, true);
+
+insert into product (id, name, category, retail_price, discounted_price, availability) values(8, 'Tees', 'Casual wear', 15.0, 14.16, true);
+
+select * from product;
+
+
+http://localhost:8000/products?category=Casual%20Wear&availability=1
+
+

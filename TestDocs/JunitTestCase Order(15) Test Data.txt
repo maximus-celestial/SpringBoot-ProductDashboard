@@ -1,0 +1,20 @@
+
+#Test Data for Junit Test Case - Order(15) - findProductsByCategoryAndAvailability() in ProductsControllerTest.java
+# http://localhost:8000/products?category=Full%20Body%20Outfits&availability=1
+
+delete from product;
+
+insert into product (id, availability, category, discounted_price, name, retail_price) values(1,TRUE,'Full Body Outfits',251.49,'Dressing Gown',303.00);
+insert into product (id, availability, category, discounted_price, name, retail_price) values(2,TRUE,'Footwear',123.00,'Shoes',150.00);
+insert into product (id, availability, category, discounted_price, name, retail_price) values(3,TRUE,'Full Body Outfits',254.81,'Nightgown',307.00);
+insert into product (id, availability, category, discounted_price, name, retail_price) values(5,TRUE,'Full Body Outfits',272.97,'Ball Gown',337.00);
+insert into product (id, availability, category, discounted_price, name, retail_price) values(9,TRUE,'Full Body Outfits',321.64,'Overalls',374.00);
+insert into product (id, availability, category, discounted_price, name, retail_price) values(14,TRUE,'Full Body Outfits',140.00,'Dress',175.00);
+insert into product (id, availability, category, discounted_price, name, retail_price) values(16,FALSE,'Full Body Outfits',423.90,'Tracksuit',471.00);
+insert into product (id, availability, category, discounted_price, name, retail_price) values(17,TRUE,'Full Body Outfits',254.81,'Tailcoat',307.00);
+insert into product (id, availability, category, discounted_price, name, retail_price) values(19,FALSE,'Full Body Outfits',100.00,'Suit',125.00);
+insert into product (id, availability, category, discounted_price, name, retail_price) values(20,FALSE,'Full Body Outfits',200.00,'Catsuit',250.00);
+insert into product (id, availability, category, discounted_price, name, retail_price) values(21,FALSE,'Full Body Outfits',362.71,'Dungarees',437.00);
+
+
+SELECT * FROM PRODUCT
